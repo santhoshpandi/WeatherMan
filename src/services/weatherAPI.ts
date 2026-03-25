@@ -2,7 +2,6 @@ import type { Coordinates, WeatherResponse } from '../types/weather'
 
 const GEO_URL = import.meta.env.VITE_GEO_URL
 const WEATHER_URL = import.meta.env.VITE_WEATHER_URL
-console.log(GEO_URL)
 
 // 🧠 In-memory cache
 const cache = new Map<string, { data: any; timestamp: number }>()

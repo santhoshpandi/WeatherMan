@@ -21,24 +21,28 @@ export const CityDetails = () => {
   const dispatch = useDispatch<AppDispatch>()
   const cityKey = cityName?.toLowerCase() || ''
 
-  const favourites = useSelector((state: RootState) => state.favourites.cities)
+  // const favourites = useSelector((state: RootState) => state.favourites.cities)
+  const cities = useSelector((state: RootState) => state.cities.list)
   const unit = useSelector((state: RootState) => state.settings.unit)
   const cityData = useSelector((state: RootState) => state.weather.cities[cityKey])
 
   const [range, setRange] = useState<24 | 48>(24)
   const [metric, setMetric] = useState<'temp' | 'wind'>('temp')
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
-
+  
   useEffect(() => {
     if (!cityData) {
-      const fav = favourites.find(c => c.name.toLowerCase() === cityKey)
-      if (fav) {
-        dispatch(fetchWeatherData({ city: fav.name, lat: fav.lat, lon: fav.lon }))
+      const city = cities.find(c => c.name.toLowerCase() === cityKey)
+      if (city) {
+        dispatch(fetchWeatherData({ city: city.name, lat: city.lat, lon: city.lon }))
       }
     }
-  }, [cityData, cityKey, favourites, dispatch])
+  }, [cityData, cityKey, cities, dispatch])
+
+
 
   const convertTemp = (t: number) =>
     unit === 'fahrenheit' ? (t * 9) / 5 + 32 : t
@@ -98,36 +102,36 @@ export const CityDetails = () => {
       </div>
 
 
-     <div className="bg-white rounded-2xl p-6 shadow-lg flex justify-between items-center">
-  {/* Temperature */}
-  <div className="flex flex-col items-center justify-center">
-    <div className="text-5xl font-extrabold text-indigo-600">
-      {Math.round(convertTemp(cityData.current.temperature))}°
-    </div>
-    <div className="text-sm text-gray-500 mt-1">Current Temp</div>
-  </div>
+      <div className="bg-white rounded-2xl p-6 shadow-lg flex justify-between items-center">
+        {/* Temperature */}
+        <div className="flex flex-col items-center justify-center">
+          <div className="text-5xl font-extrabold text-indigo-600">
+            {Math.round(convertTemp(cityData.current.temperature))}°
+          </div>
+          <div className="text-sm text-gray-500 mt-1">Current Temp</div>
+        </div>
 
-  {/* Weather Stats */}
-  <div className="grid grid-cols-2 gap-5 text-gray-700">
-    <div className="flex items-center gap-2">
-      <WiStrongWind className="text-blue-400 text-2xl" /> 
-      <span className="font-medium">{cityData.current.windSpeed} km/h</span>
-    </div>
-    <div className="flex items-center gap-2">
-      <WiHumidity className="text-teal-400 text-2xl" /> 
-      <span className="font-medium">{cityData.hourly?.humidity?.[0] ?? '--'}%</span>
-    </div>
-    <div className="flex items-center gap-2">
-      <WiBarometer className="text-orange-400 text-2xl" /> 
-      <span className="font-medium">{cityData.hourly?.pressure?.[0] ?? '--'} hPa</span>
-    </div>
-    <div className="flex items-center gap-2">
-      <span className="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-lg font-semibold text-sm">
-        UV: {cityData.daily?.uvIndex?.[0] ?? '--'}
-      </span>
-    </div>
-  </div>
-</div>
+        {/* Weather Stats */}
+        <div className="grid grid-cols-2 gap-5 text-gray-700">
+          <div className="flex items-center gap-2">
+            <WiStrongWind className="text-blue-400 text-2xl" />
+            <span className="font-medium">{cityData.current.windSpeed} km/h</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <WiHumidity className="text-teal-400 text-2xl" />
+            <span className="font-medium">{cityData.hourly?.humidity?.[0] ?? '--'}%</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <WiBarometer className="text-orange-400 text-2xl" />
+            <span className="font-medium">{cityData.hourly?.pressure?.[0] ?? '--'} hPa</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-yellow-200 text-yellow-800 px-2 py-1 rounded-lg font-semibold text-sm">
+              UV: {cityData.daily?.uvIndex?.[0] ?? '--'}
+            </span>
+          </div>
+        </div>
+      </div>
 
 
       <div className="flex gap-3 flex-wrap">
