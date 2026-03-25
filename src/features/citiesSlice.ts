@@ -1,4 +1,4 @@
-import { createSlice,type PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 interface City {
   name: string
@@ -13,7 +13,7 @@ interface CitiesState {
 const initialState: CitiesState = {
   list: [
     { name: 'Chennai', lat: 13.0878, lon: 80.2785 },
-    { name: 'Delhi', lat: 28.6139, lon: 77.209 },
+    { name: 'Bangalore', lat: 12.9716, lon: 77.5946 },
     { name: 'Mumbai', lat: 19.076, lon: 72.8777 },
   ],
 }
