@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# 🌤️ WeatherMAN
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Overview](./screenshot.png)
 
-Currently, two official plugins are available:
+Welcome to **Weather Analytics Dashboard**! ⚡ Track real-time weather with beautiful charts 📊 and detailed insights 🌡️.  
+Powered by **React** & **Redux Toolkit**, supporting **hourly, daily, and current weather** ⚡.  
+Dynamic **city search** & **location-based forecasts** 📍 with metrics like wind 💨, humidity 💧, pressure, and UV 🌞.  
+Fast **caching** & **rate-limiting** ⏱️ for smooth API usage, fully **responsive** on desktop 💻 & mobile 📱.  
+Interactive **charts** 🎨 and easy **deployment** 🚀 on Vercel or any static hosting.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ⚙️ Features
 
-## React Compiler
+- 🌍 **Global city support** – check weather anywhere in the world.  
+- ⏰ **Real-time updates** – stay updated with the latest weather.  
+- 📈 **Hourly & daily charts** – visually track temperature, wind, and precipitation.  
+- 🧩 **Component-based UI** – reusable cards, charts, and widgets.  
+- 🖌️ **Clean design** – easy to read with proper sizing & spacing.  
+- 💾 **Caching mechanism** – faster load times for repeated searches.  
+- 🔒 **Error handling** – shows user-friendly messages for API issues.  
+- 🌐 **Responsive layout** – works perfectly on mobile, tablet, and desktop.  
+- 🚦 **Rate-limiting** – avoids API overloading and ensures smooth performance.  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Tech Stack 📑
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Frontend: React.js, Redux, Tailwind, Typescript
+- Weather API: Open-Meteo
+- Charts: ReCharts
+- Deployment: Vercel
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# How to Run Locally 🏃‍♂️
+
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/santhoshpandi/WeatherMan.git
+cd WeatherMan
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 2. Create `.env` file:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```.env
+VITE_GEO_URL = open-meteo-geo-url
+VITE_WEATHER_URL = open-meteo-weather-url
 ```
+
+## 3. For Starting the App
+
+```bash
+npm install
+npm run dev
+```
+Frontend available at [PORT: 5173](http://localhost:5173/)
+
+---
+
+Coded by 💖 Santhosh Pandi
