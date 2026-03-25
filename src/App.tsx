@@ -5,7 +5,7 @@ import { Navbar } from './components/Navbar'
 
 function App() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-white via-blue-50 to-blue-100">
+    <div className="min-h-screen mx-auto max-w-[100rem] bg-linear-to-br from-white via-blue-50 to-blue-100">
       <Navbar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
