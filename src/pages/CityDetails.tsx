@@ -27,6 +27,9 @@ export const CityDetails = () => {
 
   const [range, setRange] = useState<24 | 48>(24)
   const [metric, setMetric] = useState<'temp' | 'wind'>('temp')
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   useEffect(() => {
     if (!cityData) {
