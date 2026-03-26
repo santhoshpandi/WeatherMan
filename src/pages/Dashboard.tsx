@@ -16,18 +16,20 @@ export const Dashboard = () => {
     (state: RootState) => state.favourites.cities
   )
 
+console.log('ll')
+const fetchAllCitiesWeather = useCallback(() => {
+  // Fetch weather for all cities in the current Redux 'cities' list
+  cities.forEach(city => {
+    dispatch(fetchWeatherData({ city: city.name, lat: city.lat, lon: city.lon }))
+  })
 
-  const fetchAllCitiesWeather = useCallback(() => {
-    cities.forEach((city) => {
-      dispatch(
-        fetchWeatherData({
-          city: city.name,
-          lat: city.lat,
-          lon: city.lon,
-        })
-      )
+  // Fetch weather for favourites that are missing in the weather slice
+  favourites
+    .filter(fav => !weather[fav.name.toLowerCase()])
+    .forEach(fav => {
+      dispatch(fetchWeatherData({ city: fav.name, lat: fav.lat, lon: fav.lon }))
     })
-  }, [cities, dispatch])
+}, [cities, favourites, dispatch, weather.cities])
 
   useEffect(() => {
     if (cities.length > 0) {
