@@ -16,7 +16,6 @@ export const Dashboard = () => {
     (state: RootState) => state.favourites.cities
   )
 
-console.log('ll')
 const fetchAllCitiesWeather = useCallback(() => {
   // Fetch weather for all cities in the current Redux 'cities' list
   cities.forEach(city => {
