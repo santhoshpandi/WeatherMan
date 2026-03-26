@@ -60,7 +60,7 @@ export const CityCard = ({ city, data }: any) => {
 
   return (
     <div
-     onClick={() => navigate(`/city/${city.name}`)}
+     onClick={() => navigate(`/city/${city.name}?lat=${city.lat}&lng=${city.lon}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="

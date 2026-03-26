@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootState } from '../store/store'
 import { useEffect, useMemo, useState } from 'react'
@@ -17,12 +17,16 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 export const CityDetails = () => {
   const { cityName } = useParams()
+  const [searchParams] = useSearchParams()
+  const lat = parseFloat(searchParams.get('lat') || '0')
+  const lon = parseFloat(searchParams.get('lng') || '0')
+
   const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>()
   const cityKey = cityName?.toLowerCase() || ''
 
   // const favourites = useSelector((state: RootState) => state.favourites.cities)
-  const cities = useSelector((state: RootState) => state.cities.list)
+  // const cities = useSelector((state: RootState) => state.cities.list)
   const unit = useSelector((state: RootState) => state.settings.unit)
   const cityData = useSelector((state: RootState) => state.weather.cities[cityKey])
 
@@ -32,17 +36,12 @@ export const CityDetails = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
-  
+
   useEffect(() => {
-    if (!cityData) {
-      const city = cities.find(c => c.name.toLowerCase() === cityKey)
-      if (city) {
-        dispatch(fetchWeatherData({ city: city.name, lat: city.lat, lon: city.lon }))
-      }
+    if (!cityData && cityName && lat && lon) {
+      dispatch(fetchWeatherData({ city: cityName, lat, lon }))
     }
-  }, [cityData, cityKey, cities, dispatch])
-
-
+  }, [cityData, cityName, lat, lon, dispatch])
 
   const convertTemp = (t: number) =>
     unit === 'fahrenheit' ? (t * 9) / 5 + 32 : t
